@@ -1,5 +1,4 @@
 <template>
-  <div>SteveDog huesos!</div>
   <n-message-provider>
     <n-form
         ref="formRef"
