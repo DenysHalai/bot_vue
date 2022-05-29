@@ -55,14 +55,14 @@ export default defineComponent({
       },
       methods: {
         onUpdated(text) {
-          axios.get("http://localhost:8080/location/city?value=" + text).then(res => { // Запрос данных с бека
+          axios.get("https://6a0c-93-170-55-154.eu.ngrok.io/location/city?value=" + text).then(res => { // Запрос данных с бека
             this.options = res.data;
           })
         },
-        sendData() {
-          /*window.Telegram.WebApp.sendData("qweQEW");*/
+        /*sendData() {
+          /!*window.Telegram.WebApp.sendData("qweQEW");*!/
           axios.post("http://localhost:8080/location/city?value=", this.formData) // Отправка данных на бек
-        }
+        }*/
       },
     }
 )
