@@ -81,7 +81,8 @@ export default defineComponent({
       })
     },
     sendData(){
-      window.Telegram.WebApp.sendData(this.formData) // Отправка данных в ТГ
+      console.log(this.formData)
+      window.Telegram.WebApp.sendData(JSON.stringify(this.formData)) // Отправка данных в ТГ
     }
   },
   created() {
