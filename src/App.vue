@@ -78,17 +78,17 @@ export default defineComponent({
         this.formData.number = res.data.number;
       })
     },
-    created() {
-      this.$getLocation()
-          .then((coordinates) => {
-            console.log(coordinates);
-            this.onGetCoordinates(coordinates.lat, coordinates.lng)
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-    },
-  }
+  },
+  created() {
+    this.$getLocation()
+        .then((coordinates) => {
+          console.log(coordinates);
+          this.onGetCoordinates(coordinates.lat, coordinates.lng)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  },
 })
 </script>
 
