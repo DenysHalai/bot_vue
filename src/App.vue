@@ -54,7 +54,7 @@ export default defineComponent({
       },
       methods: {
         onUpdated(text) {
-          axios.get("https://6a0c-93-170-55-154.eu.ngrok.io/location/city?value=" + text).then(res => { // Запрос данных с бека
+          axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/city?value=" + text).then(res => { // Запрос данных с бека
             this.options = res.data;
           })
         },
