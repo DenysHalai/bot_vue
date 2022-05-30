@@ -1,4 +1,7 @@
 <template>
+  <n-button @click="handleClick">
+    Створити звернення
+  </n-button>
   <n-space vertical :size="12">
     <n-data-table
         :bordered="false"
@@ -51,7 +54,11 @@ export default defineComponent({
       }
     }
   },
-  methods:{},
+  methods:{
+    handleClick(){
+      this.$router.push("/createcase?userId=" + this.userId)
+    }
+  },
   created() {
     axios.get("https://305b-93-170-55-154.eu.ngrok.io/allcases?userId=" + this.userId).then(res=>{
       this.data = res.data

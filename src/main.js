@@ -6,11 +6,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Location from "@/components/Location";
 import HelloWorld from "@/components/HelloWorld";
 import AllCases from "@/components/AllCases";
+import CreateCase from "@/components/CreateCase";
 
 const routes = [
     {path: '/', component: HelloWorld},
     {path: '/location', component: Location},
-    {path: '/allcases', component: AllCases}
+    {path: '/allcases', component: AllCases},
+    {path: '/createcase', component: CreateCase},
 ]
 
 const router = createRouter({

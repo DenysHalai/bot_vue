@@ -5,7 +5,6 @@
         inline
         :label-width="80"
     >
-
       <div class="form-values">
         <n-form-item label="Город:" path="city">
           <n-auto-complete
