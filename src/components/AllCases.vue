@@ -39,27 +39,11 @@ const createColumns = () => {
   ]
 }
 
-const createData = () => [
-  {
-    date: new Date().toDateString(),
-    title: "Немає води на 11-му поверсі",
-    description: "Вчора пропала вода на 11-му поверсі коли ремонтували трубу діди",
-    status: "Нове"
-  }
-  /*  {
-      key: 0,
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer']
-    },*/
-]
-
 export default defineComponent({
   name: "AllCases",
   data() {
     return {
-      data: createData(),
+      data: [],
       userId: this.$route.query.userId,
       columns: createColumns(),
       pagination: {
