@@ -10,6 +10,7 @@
         <n-form-item label="Город:" path="city">
           <n-auto-complete
               :on-update:value="onUpdatedCity"
+              :disabled="validated === 1"
               :options="cityOptions"
               placeholder="Город"
           />
@@ -17,6 +18,7 @@
         <n-form-item label="Название улицы:" path="street">
           <n-auto-complete
               :on-update:value="onUpdatedStreet"
+              :disabled="validated === 1"
               :options="streetOptions"
               placeholder="Улица"
           />
@@ -52,7 +54,8 @@ export default defineComponent({
             city: "",
             street: "",
             number: "",
-            numberApart: ""
+            numberApart: "",
+            validated: ""
           },
           cityOptions: [],
           streetOptions: [],
