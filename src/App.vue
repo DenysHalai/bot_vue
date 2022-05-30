@@ -10,12 +10,16 @@
         <n-form-item label="Город:" path="city">
           <n-auto-complete
               :on-update:value="onUpdated"
-              :options="options"
+              :options="cityOptions"
               placeholder="Город"
           />
         </n-form-item>
         <n-form-item label="Название улицы:" path="street">
-          <n-input v-model:value="formData.street" placeholder="Улица"/>
+          <n-auto-complete
+              :on-update:value="onUpdated"
+              :options="streetOptions"
+              placeholder="Улица"
+          />
         </n-form-item>
         <n-form-item label="Номер дома:" path="number">
           <n-input v-model:value="formData.number" placeholder="Номер дома"/>
@@ -31,7 +35,8 @@
       </div>
     </n-form>
 
-    <pre>{{ JSON.stringify(options, null, 2) }}</pre>
+    <pre>{{ JSON.stringify(cityOptions, null, 2) }}</pre>
+    <pre>{{ JSON.stringify(streetOptions, null, 2) }}</pre>
   </n-message-provider>
 </template>
 
@@ -49,13 +54,17 @@ export default defineComponent({
             number: "",
             numberApart: ""
           },
-          options: [],
+          cityOptions: [],
+          streetOptions: [],
         }
       },
       methods: {
         onUpdated(text) {
           axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/city?value=" + text).then(res => { // Запрос данных с бека
-            this.options = res.data;
+            this.cityOptions = res.data;
+          })
+          axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/street?value=" + text).then(res => { // Запрос данных с бека
+            this.streetOptions = res.data;
           })
         },
         /*sendData() {
