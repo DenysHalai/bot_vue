@@ -28,7 +28,7 @@ const createColumns = () => {
     },
     {
       title: 'Опис',
-      key: 'desc',
+      key: 'description',
       className: 'desc'
     },
     {
@@ -43,7 +43,7 @@ const createData = () => [
   {
     date: new Date().toDateString(),
     title: "Немає води на 11-му поверсі",
-    desc: "Вчора пропала вода на 11-му поверсі коли ремонтували трубу діди",
+    description: "Вчора пропала вода на 11-му поверсі коли ремонтували трубу діди",
     status: "Нове"
   }
   /*  {
@@ -69,7 +69,7 @@ export default defineComponent({
   methods:{},
   created() {
     axios.get("https://305b-93-170-55-154.eu.ngrok.io/allcases?userId=1870397359").then(res=>{
-      this.columns = res.data
+      this.data = res.data
       console.log(res.data)
     })
   }
