@@ -37,7 +37,7 @@ export default defineComponent({
   },
   methods:{
     sendData() {
-      let value = {...this.formData, userId: this.$route.query.userId};
+      let value = {...this.formData, userId: this.$route.query.userId, state: "7"};
       window.Telegram.WebApp.sendData(JSON.stringify(value))
       console.log(value)// Отправка данных в ТГ
     }
