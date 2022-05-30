@@ -80,6 +80,9 @@ export default defineComponent({
         this.formData.number = res.data.number;
       })
     },
+    sendData(){
+      window.Telegram.WebApp.sendData(this.formData) // Отправка данных в ТГ
+    }
   },
   created() {
     this.$getLocation()
