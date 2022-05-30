@@ -10,7 +10,6 @@
         <n-form-item label="Город:" path="city">
           <n-auto-complete
               :on-update:value="onUpdatedCity"
-              :disabled="validated === 1"
               :options="cityOptions"
               placeholder="Город"
           />
@@ -18,7 +17,6 @@
         <n-form-item label="Название улицы:" path="street">
           <n-auto-complete
               :on-update:value="onUpdatedStreet"
-              :disabled="validated === 1"
               :options="streetOptions"
               placeholder="Улица"
           />
@@ -54,8 +52,7 @@ export default defineComponent({
             city: "",
             street: "",
             number: "",
-            numberApart: "",
-            validated: ""
+            numberApart: ""
           },
           cityOptions: [],
           streetOptions: [],
@@ -67,7 +64,7 @@ export default defineComponent({
             this.cityOptions = res.data;
           })
         },
-        onUpdatedStreet(text){
+        onUpdatedStreet(text) {
           axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/street?value=" + text).then(res => { // Запрос данных с бека
             this.streetOptions = res.data;
           })
@@ -76,6 +73,15 @@ export default defineComponent({
           /!*window.Telegram.WebApp.sendData("qweQEW");*!/
           axios.post("http://localhost:8080/location/city?value=", this.formData) // Отправка данных на бек
         }*/
+      },
+      created() {
+        this.$getLocation()
+            .then((coordinates) => {
+              console.log(coordinates);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
       },
     }
 )
