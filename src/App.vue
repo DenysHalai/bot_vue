@@ -12,6 +12,7 @@
               :on-update:value="onUpdatedCity"
               :options="cityOptions"
               placeholder="Город"
+              v-model:value="formData.city"
           />
         </n-form-item>
         <n-form-item label="Название улицы:" path="street">
@@ -19,6 +20,7 @@
               :on-update:value="onUpdatedStreet"
               :options="streetOptions"
               placeholder="Улица"
+              v-model:value="formData.street"
           />
         </n-form-item>
         <n-form-item label="Номер дома:" path="number">
@@ -45,46 +47,48 @@ import {defineComponent} from "vue";
 import axios from "axios";
 
 export default defineComponent({
-      name: 'App',
-      data() {
-        return {
-          formData: {
-            city: "",
-            street: "",
-            number: "",
-            numberApart: ""
-          },
-          cityOptions: [],
-          streetOptions: [],
-        }
+  name: 'App',
+  data() {
+    return {
+      formData: {
+        city: "",
+        street: "",
+        number: "",
+        numberApart: ""
       },
-      methods: {
-        onUpdatedCity(text) {
-          axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/city?value=" + text).then(res => { // Запрос данных с бека
-            this.cityOptions = res.data;
-          })
-        },
-        onUpdatedStreet(text) {
-          axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/street?value=" + text).then(res => { // Запрос данных с бека
-            this.streetOptions = res.data;
-          })
-        }
-        /*sendData() {
-          /!*window.Telegram.WebApp.sendData("qweQEW");*!/
-          axios.post("http://localhost:8080/location/city?value=", this.formData) // Отправка данных на бек
-        }*/
-      },
-      created() {
-        this.$getLocation()
-            .then((coordinates) => {
-              console.log(coordinates);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-      },
+      cityOptions: [],
+      streetOptions: [],
     }
-)
+  },
+  methods: {
+    onUpdatedCity(text) {
+      axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/city?value=" + text).then(res => { // Запрос данных с бека
+        this.cityOptions = res.data;
+      })
+    },
+    onUpdatedStreet(text) {
+      axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/street?value=" + text).then(res => { // Запрос данных с бека
+        this.streetOptions = res.data;
+      })
+    },
+    onGetCoordinates(lat, lng) {
+      axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/auto/?lat=" + lat + "&lng=" + lng).then(res => {
+        this.formData.city = res.data.city;
+        this.formData.street = res.data.street;
+        this.formData.number = res.data.number;
+      })
+    },
+    created() {
+      this.$getLocation()
+          .then((coordinates) => {
+            this.onGetCoordinates(coordinates.lat, coordinates.lng)
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    },
+  }
+})
 </script>
 
 <style>
