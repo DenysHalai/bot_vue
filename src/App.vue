@@ -9,18 +9,18 @@
       <div class="form-values">
         <n-form-item label="Город:" path="city">
           <n-auto-complete
-              :on-select="onUpdatedCity"
+              :value="formData.city"
+              :on-update:value="onUpdatedCity"
               :options="cityOptions"
               placeholder="Город"
-              v-model:value="formData.city"
           />
         </n-form-item>
         <n-form-item label="Название улицы:" path="street">
           <n-auto-complete
-              :on-select="onUpdatedStreet"
+              :value="formData.street"
+              :on-update:value="onUpdatedStreet"
               :options="streetOptions"
               placeholder="Улица"
-              v-model:value="formData.street"
           />
         </n-form-item>
         <n-form-item label="Номер дома:" path="number">
@@ -62,11 +62,13 @@ export default defineComponent({
   },
   methods: {
     onUpdatedCity(text) {
+      this.formData.city = text;
       axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/city?value=" + text).then(res => { // Запрос данных с бека
         this.cityOptions = res.data;
       })
     },
     onUpdatedStreet(text) {
+      this.formData.street = text;
       axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/street?value=" + text).then(res => { // Запрос данных с бека
         this.streetOptions = res.data;
       })
