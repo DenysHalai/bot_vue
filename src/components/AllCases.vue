@@ -60,6 +60,7 @@ export default defineComponent({
   data() {
     return {
       data: createData(),
+      userId: this.$route.query.userId,
       columns: createColumns(),
       pagination: {
         pageSize: 8
@@ -68,7 +69,7 @@ export default defineComponent({
   },
   methods:{},
   created() {
-    axios.get("https://305b-93-170-55-154.eu.ngrok.io/allcases?userId=1870397359").then(res=>{
+    axios.get("https://305b-93-170-55-154.eu.ngrok.io/allcases?userId=" + this.userId).then(res=>{
       this.data = res.data
       console.log(res.data)
     })
