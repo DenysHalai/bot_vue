@@ -81,6 +81,7 @@ export default defineComponent({
     created() {
       this.$getLocation()
           .then((coordinates) => {
+            console.log(coordinates);
             this.onGetCoordinates(coordinates.lat, coordinates.lng)
           })
           .catch((error) => {
