@@ -9,14 +9,14 @@
       <div class="form-values">
         <n-form-item label="Город:" path="city">
           <n-auto-complete
-              :on-update:value="onUpdated"
+              :on-update:value="onUpdatedCity"
               :options="cityOptions"
               placeholder="Город"
           />
         </n-form-item>
         <n-form-item label="Название улицы:" path="street">
           <n-auto-complete
-              :on-update:value="onUpdated"
+              :on-update:value="onUpdatedStreet"
               :options="streetOptions"
               placeholder="Улица"
           />
@@ -59,14 +59,16 @@ export default defineComponent({
         }
       },
       methods: {
-        onUpdated(text) {
+        onUpdatedCity(text) {
           axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/city?value=" + text).then(res => { // Запрос данных с бека
             this.cityOptions = res.data;
           })
+        },
+        onUpdatedStreet(text){
           axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/street?value=" + text).then(res => { // Запрос данных с бека
             this.streetOptions = res.data;
           })
-        },
+        }
         /*sendData() {
           /!*window.Telegram.WebApp.sendData("qweQEW");*!/
           axios.post("http://localhost:8080/location/city?value=", this.formData) // Отправка данных на бек
