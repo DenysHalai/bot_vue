@@ -50,7 +50,7 @@ export default defineComponent({
       userId: this.$route.query.userId,
       columns: createColumns(),
       pagination: {
-        pageSize: 8
+        pageSize: 3
       }
     }
   },
