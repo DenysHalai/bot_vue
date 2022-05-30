@@ -9,18 +9,18 @@
       <div class="form-values">
         <n-form-item label="Город:" path="city">
           <n-auto-complete
-              :on-update:value="onUpdatedCity"
+              :on-select="onUpdatedCity"
               :options="cityOptions"
               placeholder="Город"
-              :default-value="formData.city"
+              v-model:value="formData.city"
           />
         </n-form-item>
         <n-form-item label="Название улицы:" path="street">
           <n-auto-complete
-              :on-update:value="onUpdatedStreet"
+              :on-select="onUpdatedStreet"
               :options="streetOptions"
               placeholder="Улица"
-              :default-value="formData.street"
+              v-model:value="formData.street"
           />
         </n-form-item>
         <n-form-item label="Номер дома:" path="number">
