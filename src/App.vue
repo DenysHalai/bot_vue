@@ -12,7 +12,7 @@
               :on-update:value="onUpdatedCity"
               :options="cityOptions"
               placeholder="Город"
-              :value="formData.city"
+              :default-value="formData.city"
           />
         </n-form-item>
         <n-form-item label="Название улицы:" path="street">
@@ -20,7 +20,7 @@
               :on-update:value="onUpdatedStreet"
               :options="streetOptions"
               placeholder="Улица"
-              :value="formData.street"
+              :default-value="formData.street"
           />
         </n-form-item>
         <n-form-item label="Номер дома:" path="number">
