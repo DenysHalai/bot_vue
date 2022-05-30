@@ -36,9 +36,6 @@
         </n-form-item>
       </div>
     </n-form>
-
-    <pre>{{ JSON.stringify(cityOptions, null, 2) }}</pre>
-    <pre>{{ JSON.stringify(streetOptions, null, 2) }}</pre>
   </n-message-provider>
 </template>
 
@@ -103,6 +100,7 @@ export default defineComponent({
 @import 'vfonts/FiraCode.css';
 
 body {
+  background-color: whitesmoke;
   display: flex;
   flex-direction: column;
   align-items: center;
