@@ -79,7 +79,7 @@ export default defineComponent({
   created() {
     axios.get("https://83f0-104-28-224-95.eu.ngrok.io/allcases?userId=" + this.userId).then(res => {
       this.data = res.data.map(item => {
-        item.date = DateTime.fromISO(item.date).toFormat('yyyy LLL dd, HH:mm');
+        item.date = DateTime.fromISO(item.date).toFormat('HH:mm, dd LLL yyyy');
         return item;
       })
       this.hideTable = this.data.length === 0;
