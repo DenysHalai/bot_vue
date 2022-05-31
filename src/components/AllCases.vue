@@ -78,11 +78,7 @@ export default defineComponent({
   created() {
     axios.get("https://83f0-104-28-224-95.eu.ngrok.io/allcases?userId=" + this.userId).then(res => {
       this.data = res.data
-      if (this.data.length === 0) {
-        return this.hideTable = true;
-      } else {
-        return this.hideTable = false;
-      }
+      this.hideTable = this.data.length === 0;
     })
   }
 })
@@ -124,10 +120,13 @@ export default defineComponent({
 
 .textVisible{
   font-size: 18px;
-  max-width: 300px;
   text-align: center;
   padding: 10px;
   display: block;
+}
+
+.visibleItems{
+  text-align: center;
 }
 
 </style>
