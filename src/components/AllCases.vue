@@ -26,8 +26,6 @@
       Створити звернення
     </n-button>
   </div>
-  <pre>{{ JSON.stringify(userData, null, 2) }}
-</pre>
 </template>
 
 <script>
@@ -68,7 +66,6 @@ export default defineComponent({
       userId: this.$route.query.userId,
       columns: createColumns(),
       hideTable: true,
-      userData: window.Telegram.WebApp.initDataUnsafe,
       pagination: {
         pageSize: 3
       }
