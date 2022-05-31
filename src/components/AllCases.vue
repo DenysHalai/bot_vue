@@ -64,7 +64,7 @@ export default defineComponent({
       data: [],
       userId: this.$route.query.userId,
       columns: createColumns(),
-      hideTable: "",
+      hideTable: true,
       pagination: {
         pageSize: 3
       }
