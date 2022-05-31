@@ -31,6 +31,7 @@
 <script>
 import {defineComponent} from 'vue'
 import axios from "axios";
+import {DateTime} from "luxon";
 
 const createColumns = () => {
   return [
@@ -77,7 +78,10 @@ export default defineComponent({
   },
   created() {
     axios.get("https://83f0-104-28-224-95.eu.ngrok.io/allcases?userId=" + this.userId).then(res => {
-      this.data = res.data
+      this.data = res.data.map(item => {
+        item.date = DateTime.fromISO(item.date).toFormat('yyyy LLL dd, HH:mm');
+        return item;
+      })
       this.hideTable = this.data.length === 0;
     })
   }
