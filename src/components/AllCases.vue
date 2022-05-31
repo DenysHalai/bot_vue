@@ -26,6 +26,8 @@
       Створити звернення
     </n-button>
   </div>
+  <pre>{{ JSON.stringify(window.Telegram.WebApp.initData, null, 2) }}
+</pre>
 </template>
 
 <script>
