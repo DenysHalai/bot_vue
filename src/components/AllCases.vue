@@ -1,16 +1,31 @@
 <template>
-  <n-button @click="handleClick">
-    Створити звернення
-  </n-button>
-  <n-space vertical :size="12">
-    <n-data-table
-        :bordered="false"
-        :single-line="false"
-        :columns="columns"
-        :data="data"
-        :pagination="pagination"
-    />
-  </n-space>
+  <div v-if="hideTable === true">
+    <div class="visibleItems">
+      <n-text class="textVisible">
+        Оберіть звернення нижче або створіть нове
+      </n-text>
+      <n-button @click="handleClick">
+        Створити звернення
+      </n-button>
+    </div>
+    <n-space vertical :size="12">
+      <n-data-table
+          :bordered="false"
+          :single-line="false"
+          :columns="columns"
+          :data="data"
+          :pagination="pagination"
+      />
+    </n-space>
+  </div>
+  <div v-else class="hideItems">
+    <n-text class="textHide">
+      У вас ще немає зверненнь. Бажаєте створити?
+    </n-text>
+    <n-button @click="handleClick">
+      Створити звернення
+    </n-button>
+  </div>
 </template>
 
 <script>
@@ -49,20 +64,25 @@ export default defineComponent({
       data: [],
       userId: this.$route.query.userId,
       columns: createColumns(),
+      hideTable: "",
       pagination: {
         pageSize: 3
       }
     }
   },
-  methods:{
-    handleClick(){
+  methods: {
+    handleClick() {
       this.$router.push("/createcase?userId=" + this.userId)
     }
   },
   created() {
-    axios.get("https://305b-93-170-55-154.eu.ngrok.io/allcases?userId=" + this.userId).then(res=>{
+    axios.get("https://305b-93-170-55-154.eu.ngrok.io/allcases?userId=" + this.userId).then(res => {
       this.data = res.data
-      console.log(res.data)
+      if (this.data === 0) {
+        return this.hideTable = true;
+      } else {
+        return this.hideTable = false;
+      }
     })
   }
 })
@@ -76,14 +96,38 @@ export default defineComponent({
   max-width: 150px;
   padding: 8px;
 }
-:deep(.n-data-table-td){
+
+:deep(.n-data-table-td) {
   padding: 10px;
 }
-:deep(.date){
+
+:deep(.date) {
   max-width: 100px !important;
   padding: 8px;
 }
-:deep(.title){
+
+:deep(.title) {
   max-width: 160px;
 }
+
+.textHide {
+  font-size: 22px;
+  max-width: 300px;
+  text-align: center;
+  padding: 40px;
+  display: block;
+}
+
+.hideItems {
+  text-align: center;
+}
+
+.textVisible{
+  font-size: 18px;
+  max-width: 300px;
+  text-align: center;
+  padding: 10px;
+  display: block;
+}
+
 </style>
