@@ -78,7 +78,7 @@ export default defineComponent({
   created() {
     axios.get("https://83f0-104-28-224-95.eu.ngrok.io/allcases?userId=" + this.userId).then(res => {
       this.data = res.data
-      if (this.data === null) {
+      if (this.data.length === 0) {
         return this.hideTable = true;
       } else {
         return this.hideTable = false;
