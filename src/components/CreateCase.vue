@@ -20,6 +20,8 @@
 
   <pre>{{ JSON.stringify(formData, null, 2) }}
 </pre>
+  <pre>{{ JSON.stringify(window.Telegram.WebApp.initData, null, 2) }}
+</pre>
 </template>
 
 <script>
