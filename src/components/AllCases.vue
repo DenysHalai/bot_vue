@@ -1,5 +1,5 @@
 <template>
-  <div v-if="hideTable === true">
+  <div v-if="hideTable === false">
     <div class="visibleItems">
       <n-text class="textVisible">
         Оберіть звернення нижче або створіть нове
