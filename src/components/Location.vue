@@ -60,18 +60,18 @@ export default defineComponent({
   methods: {
     onUpdatedCity(text) {
       this.formData.city = text;
-      axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/city?value=" + text).then(res => { // Запрос данных с бека
+      axios.get("https://83f0-104-28-224-95.eu.ngrok.io/location/city?value=" + text).then(res => { // Запрос данных с бека
         this.cityOptions = res.data;
       })
     },
     onUpdatedStreet(text) {
       this.formData.street = text;
-      axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/street?value=" + text).then(res => { // Запрос данных с бека
+      axios.get("https://83f0-104-28-224-95.eu.ngrok.io/location/street?value=" + text).then(res => { // Запрос данных с бека
         this.streetOptions = res.data;
       })
     },
     onGetCoordinates(lat, lng) {
-      axios.get("https://305b-93-170-55-154.eu.ngrok.io/location/auto/?lat=" + lat + "&lng=" + lng).then(res => {
+      axios.get("https://83f0-104-28-224-95.eu.ngrok.io/location/auto/?lat=" + lat + "&lng=" + lng).then(res => {
         this.formData.city = res.data.city;
         this.formData.street = res.data.street;
         this.formData.number = res.data.number;
