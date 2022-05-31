@@ -61,7 +61,7 @@ export default defineComponent({
   name: "AllCases",
   data() {
     return {
-      data: [],
+      data: null,
       userId: this.$route.query.userId,
       columns: createColumns(),
       hideTable: true,
@@ -127,6 +127,7 @@ export default defineComponent({
 
 .visibleItems{
   text-align: center;
+  padding: 20px;
 }
 
 </style>
