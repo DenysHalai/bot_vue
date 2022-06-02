@@ -66,7 +66,7 @@ export default defineComponent({
     },
     onUpdatedStreet(text) {
       this.formData.street = text;
-      axios.get("https://1763-93-170-55-154.eu.ngrok.io/location/?cityName=" + this.formData.city + "&streetName" + text).then(res => { // Запрос данных с бека
+      axios.get("https://1763-93-170-55-154.eu.ngrok.io/location/?cityName=" + this.formData.city + "&streetName=" + text).then(res => { // Запрос данных с бека
         this.streetOptions = res.data;
       })
     },
