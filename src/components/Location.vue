@@ -60,18 +60,18 @@ export default defineComponent({
   methods: {
     onUpdatedCity(text) {
       this.formData.city = text;
-      axios.get("https://testbotforresidents.herokuapp.com/location/?cityName=" + text).then(res => { // Запрос данных с бека
+      axios.get("http://93.170.55.154/location/?cityName=" + text).then(res => { // Запрос данных с бека
         this.cityOptions = res.data; // Ответ на фронт
       })
     },
     onUpdatedStreet(text) {
       this.formData.street = text;
-      axios.get("https://testbotforresidents.herokuapp.com/location/?cityName=" + this.formData.city + "&streetName=" + text).then(res => { // Запрос данных с бека
+      axios.get("http://93.170.55.154/location/?cityName=" + this.formData.city + "&streetName=" + text).then(res => { // Запрос данных с бека
         this.streetOptions = res.data; // Ответ на фронт
       })
     },
     onGetCoordinates(lat, lng) {
-      axios.get("https://testbotforresidents.herokuapp.com/location/auto/?lat=" + lat + "&lng=" + lng).then(res => {
+      axios.get("http://93.170.55.154/location/auto/?lat=" + lat + "&lng=" + lng).then(res => {
         this.formData.city = res.data.city;
         this.formData.street = res.data.street;
         this.formData.number = res.data.number;
