@@ -77,7 +77,7 @@ export default defineComponent({
     }
   },
   created() {
-    axios.get("https://f0fa-93-170-55-154.eu.ngrok.io/allcases?userId=" + this.userId).then(res => {
+    axios.get("https://e131-93-170-55-154.eu.ngrok.io/allcases?userId=" + this.userId).then(res => {
       this.data = res.data.map(item => {
         item.date = DateTime.fromISO(item.date).toFormat('HH:mm, dd LLL yyyy');
         return item;
