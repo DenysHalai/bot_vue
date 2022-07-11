@@ -86,10 +86,28 @@ export default defineComponent({
         this.streetOptions = res.data; // Ответ на фронт
       })
     },
+    onGetCoordinates(lat, lng) {
+      axios.get("https://bot-test.fun/location/auto/?lat=" + lat + "&lng=" + lng).then(res => {
+        this.formData.region = res.data.region;
+        this.formData.city = res.data.city;
+        this.formData.street = res.data.street;
+        this.formData.number = res.data.number;
+      })
+    },
     sendData() {
       console.log(this.formData)
       window.Telegram.WebApp.sendData(JSON.stringify(this.formData)) // Отправка данных в ТГ
     }
+  },
+  created() {
+    this.$getLocation()
+        .then((coordinates) => {
+          console.log(coordinates);
+          this.onGetCoordinates(coordinates.lat, coordinates.lng)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   },
 })
 </script>
