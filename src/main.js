@@ -7,12 +7,14 @@ import Location from "@/components/Location";
 import HelloWorld from "@/components/HelloWorld";
 import AllCases from "@/components/AllCases";
 import CreateCase from "@/components/CreateCase";
+import AllLocation from "@/components/AllLocation";
 
 const routes = [
     {path: '/', component: HelloWorld},
     {path: '/location', component: Location},
     {path: '/allcases', component: AllCases},
     {path: '/createcase', component: CreateCase},
+    {path: '/alllocation', component: AllLocation},
 ]
 
 const router = createRouter({
