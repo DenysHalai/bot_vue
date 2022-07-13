@@ -2,29 +2,50 @@
   <div v-if="hideTable === false">
     <div class="visibleItems">
       <n-text class="textVisible">
-        Оберіть свою адресу нижче або додайте нову
+        Список ваших адрес:
       </n-text>
-      <n-button @click="handleClick">
-        Додати адресу
-      </n-button>
     </div>
-    <n-space vertical :size="12">
-      <n-data-table
-          :bordered="false"
-          :single-line="false"
-          :columns="columns"
-          :data="data"
-          :pagination="pagination"
-      />
-    </n-space>
+    <table id="userData">
+      <tr>
+        <th>ID</th>
+        <th>Регіон/область</th>
+        <th>Місто/селище</th>
+        <th>Вулиця</th>
+        <th style="max-width: 70px; line-height: 1;">№ будинку</th>
+        <th style="max-width: 50px;">Квартира</th>
+        <th>Дія</th>
+      </tr>
+      <tr v-for="(data, k) in data" :key="k">
+        <td>
+          <input style="max-width: 20px;" readonly class="tableDisplay" type="text" v-model="data.id"/>
+        </td>
+        <td>
+          <input readonly class="tableDisplay" type="text" v-model="data.region"/>
+        </td>
+        <td>
+          <input readonly class="tableDisplay" type="text" v-model="data.city"/>
+        </td>
+        <td>
+          <input readonly class="tableDisplay" type="text" v-model="data.street"/>
+        </td>
+        <td>
+          <input style="max-width: 50px;" readonly class="tableDisplay" type="text" v-model="data.number"/>
+        </td>
+        <td>
+          <input style="max-width: 50px;" readonly class="tableDisplay" type="text" v-model="data.apartment"/>
+        </td>
+        <td>
+          <button type='button' class="buttonDelete" @click="deleteData(k)">
+            DELETE
+          </button>
+        </td>
+      </tr>
+    </table>
   </div>
   <div v-else class="hideItems">
     <n-text class="textHide">
-      У вас ще немає доданих адрес. Бажаєте додати?
+      У вас ще немає доданих адрес. Будь-ласка, закрийте це вікно і додайте нову адресу.
     </n-text>
-    <n-button @click="handleClick">
-      Додати адресу
-    </n-button>
   </div>
 </template>
 
@@ -32,54 +53,26 @@
 import {defineComponent} from 'vue'
 import axios from "axios";
 
-const createColumns = () => {
-  return [
-    {
-      title: 'Регіон/область',
-      key: 'region',
-      className: 'region'
-    },
-    {
-      title: 'Місто/селище',
-      key: 'city',
-      className: 'city'
-    },
-    {
-      title: 'Вулиця',
-      key: 'street',
-      className: 'street'
-    },
-    {
-      title: 'Номер будинку',
-      key: 'number',
-      className: 'number'
-    },
-    {
-      title: 'Квартира',
-      key: 'apartment',
-      className: 'apartment'
-    }
-  ]
-}
-
 export default defineComponent({
   name: "AllLocation",
   data() {
     return {
-      data: null,
+      data: [],
       userId: this.$route.query.userId,
-      columns: createColumns(),
       hideTable: true,
       pagination: {
-        pageSize: 3
-      }
+        pageSize: 5
+      },
     }
   },
-  methods: {
-    handleClick() {
-      this.$router.push("/location?userId=" + this.userId)
-    }
-  },
+  methods:
+      {
+        deleteData(data) {
+          let index = this.data.indexOf(data)
+          this.data.splice(index, 1)
+          axios.delete("https://bot-test.fun/alllocation/" + index)
+        }
+      },
   created() {
     axios.get("https://bot-test.fun/alllocation?userId=" + this.userId).then(res => {
       this.data = res.data.map(item => {
@@ -87,7 +80,7 @@ export default defineComponent({
       })
       this.hideTable = this.data.length === 0;
     })
-  }
+  },
 })
 </script>
 
@@ -104,11 +97,6 @@ export default defineComponent({
   padding: 10px;
 }
 
-:deep(.date) {
-  max-width: 100px !important;
-  padding: 8px;
-}
-
 :deep(.title) {
   max-width: 160px;
 }
@@ -121,18 +109,24 @@ export default defineComponent({
   display: block;
 }
 
+.tableDisplay {
+  text-align: center;
+  border: none;
+  background-color: whitesmoke;
+}
+
 .hideItems {
   text-align: center;
 }
 
-.textVisible{
+.textVisible {
   font-size: 18px;
   text-align: center;
   padding: 10px;
   display: block;
 }
 
-.visibleItems{
+.visibleItems {
   text-align: center;
   padding: 20px;
 }
