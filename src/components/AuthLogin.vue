@@ -1,5 +1,10 @@
 <template>
   <div>
+    Тут будет форма<br>
+    Pole 1 <br/>
+    Pole 2 <br/><br/>
+    Pole 3 <br/><br/>
+    Кнопка авторизации<br/>
   </div>
 </template>
 
