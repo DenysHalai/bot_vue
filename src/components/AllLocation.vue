@@ -5,42 +5,14 @@
         Список ваших адрес:
       </n-text>
     </div>
-    <table id="userData">
-      <tr>
-        <th>ID</th>
-        <th>Регіон/область</th>
-        <th>Місто/селище</th>
-        <th>Вулиця</th>
-        <th style="max-width: 70px; line-height: 1;">№ будинку</th>
-        <th style="max-width: 50px;">Квартира</th>
-        <th>Дія</th>
-      </tr>
-      <tr v-for="(data, k) in data" :key="k">
-        <td>
-          <input style="max-width: 20px;" readonly class="tableDisplay" type="text" v-model="data.id"/>
-        </td>
-        <td>
-          <input readonly class="tableDisplay" type="text" v-model="data.region"/>
-        </td>
-        <td>
-          <input readonly class="tableDisplay" type="text" v-model="data.city"/>
-        </td>
-        <td>
-          <input readonly class="tableDisplay" type="text" v-model="data.street"/>
-        </td>
-        <td>
-          <input style="max-width: 50px;" readonly class="tableDisplay" type="text" v-model="data.number"/>
-        </td>
-        <td>
-          <input style="max-width: 50px;" readonly class="tableDisplay" type="text" v-model="data.apartment"/>
-        </td>
-        <td>
-          <button type='button' class="buttonDelete" @click="deleteData(k)">
-            DELETE
-          </button>
-        </td>
-      </tr>
-    </table>
+    <n-space vertical :size="12">
+      <n-data-table
+          :bordered="false"
+          :single-line="true"
+          :columns="columns"
+          :data="data"
+      />
+    </n-space>
   </div>
   <div v-else class="hideItems">
     <n-text class="textHide">
@@ -50,8 +22,9 @@
 </template>
 
 <script>
-import {defineComponent} from 'vue'
+import {defineComponent, h} from 'vue'
 import axios from "axios";
+import {NButton} from "naive-ui";
 
 export default defineComponent({
   name: "AllLocation",
@@ -59,6 +32,7 @@ export default defineComponent({
     return {
       data: [],
       userId: this.$route.query.userId,
+      columns: this.createColumns(),
       hideTable: true,
       pagination: {
         pageSize: 5
@@ -67,10 +41,54 @@ export default defineComponent({
   },
   methods:
       {
-        deleteData(data) {
-          let index = this.data.indexOf(data)
-          this.data.splice(index, 1)
-          axios.delete("https://bot-test.fun/alllocation/" + index)
+        handleClick() {
+          this.$router.push("/location?userId=" + this.userId)
+        },
+        createColumns() {
+          const self = this;
+          return [
+            {
+              title: 'Регіон/область',
+              key: 'region',
+              className: 'region'
+            },
+            {
+              title: 'Місто/селище',
+              key: 'city',
+              className: 'city'
+            },
+            {
+              title: 'Вулиця',
+              key: 'street',
+              className: 'street'
+            },
+            {
+              title: 'Номер будинку',
+              key: 'number',
+              className: 'number'
+            },
+            {
+              title: 'Квартира',
+              key: 'apartment',
+              className: 'apartment'
+            },
+            {
+              title: "Дія",
+              key: "actions",
+              render(row) {
+                return h(NButton, {
+                  strong: true,
+                  tertiary: true,
+                  size: "small",
+                  onClick: () => {
+                    console.log(self.data)
+                    const arrayId = self.data.findIndex(x => x.id === row.id)
+                    axios.delete("https://bot-test.fun/alllocation/" + row.id).then(() => self.data.splice(arrayId, 1))
+                  }
+                }, {default: () => "🗑️"});
+              }
+            }
+          ]
         }
       },
   created() {
@@ -107,12 +125,6 @@ export default defineComponent({
   text-align: center;
   padding: 40px;
   display: block;
-}
-
-.tableDisplay {
-  text-align: center;
-  border: none;
-  background-color: whitesmoke;
 }
 
 .hideItems {
