@@ -9,6 +9,11 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
+function onTelegramAuth(user) {
+  alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+  console.log('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')')
+}
 export default {
   name: 'AuthLogin',
   props: {
@@ -21,8 +26,11 @@ export default {
     insertScript.setAttribute('data-telegram-login', 'company_testDenis_bot')
     insertScript.setAttribute('data-size', 'large')
     insertScript.setAttribute('data-onauth', 'onTelegramAuth(user)')
+    insertScript.setAttribute('data-request-access', 'write')
+    insertScript.setAttribute('data-radius', '1')
     document.body.appendChild(insertScript)
-  }
+  },
+
 }
 </script>
 
