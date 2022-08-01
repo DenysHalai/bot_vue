@@ -1,6 +1,7 @@
 <template>
+  <auth-login/>
   <div class="container">
-    <auth-login/>
+
 
     <!-- Callback mode -->
     <!--
