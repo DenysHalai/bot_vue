@@ -26,10 +26,12 @@ export default {
     insertScript.setAttribute('data-request-access', 'write')
     insertScript.setAttribute('data-radius', '1')
     document.body.appendChild(insertScript)
+    window.hui = this
+    console.log(this)
   },
   methods:{
-    onTelegramAuth(user) {
-      alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+    sasha(user) {
+      console.log(user)
     }
   }
 }
