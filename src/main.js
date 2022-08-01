@@ -1,6 +1,7 @@
 import {createApp} from 'vue'
 import App from './App.vue'
 import naive from 'naive-ui'
+import VueCookies from "vue-cookies";
 import VueGeolocation from "vue3-geolocation/src";
 import { createRouter, createWebHistory } from 'vue-router'
 import Location from "@/components/Location";
@@ -27,6 +28,7 @@ createApp(App)
     .use(router)
     .use(naive)
     .use(VueGeolocation)
+    .use(VueCookies)
     .mount('#app');
 
 
