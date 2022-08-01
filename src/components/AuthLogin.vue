@@ -6,27 +6,30 @@
     Pole 3 <br/><br/>
     Кнопка авторизации<br/>
   </div>
-  <vue-telegram-login
-      mode="callback"
-      telegram-login="@company_testDenis_bot"
-      @callback="yourCallbackFunction" />
 </template>
 
 <script>
-import {vueTelegramLogin} from 'vue-telegram-login'
 // eslint-disable-next-line no-unused-vars
 export default {
   name: 'AuthLogin',
   props: {
     msg: String
   },
-  components: {vueTelegramLogin},
-  methods: {
-    yourCallbackFunction(user) {
-      // gets user as an input
-      // id, first_name, last_name, username,
-      // photo_url, auth_date and hash
-      console.log(user)
+  mounted() {
+    const insertScript = document.createElement('script')
+    insertScript.async
+    insertScript.setAttribute('src', 'https://telegram.org/js/telegram-widget.js?19')
+    insertScript.setAttribute('data-telegram-login', 'company_testDenis_bot')
+    insertScript.setAttribute('data-size', 'large')
+    insertScript.setAttribute('data-onauth', 'onTelegramAuth(user)')
+    insertScript.setAttribute('data-request-access', 'write')
+    insertScript.setAttribute('data-radius', '1')
+    document.body.appendChild(insertScript)
+  },
+  methods:{
+    onTelegramAuth(user) {
+      alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+      console.log('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')')
     }
   }
 }
