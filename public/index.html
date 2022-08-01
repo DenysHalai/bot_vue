@@ -11,6 +11,11 @@
     <script src="https://unpkg.com/vue-router@4"></script>
 </head>
 <body>
+<script type="text/javascript">
+    function onTelegramAuth(user) {
+        alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+    }
+</script>
 <noscript>
     <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
         Please enable it to continue.</strong>
